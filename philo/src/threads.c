@@ -30,18 +30,18 @@ int	run_threads(t_params *params)
 	num_of_philos = get_num_of_philos(params);
 	i = 0;
 	params->time_start = get_time();
-	while (++i < num_of_philos)
+	while (i < num_of_philos)
 	{
-		if (pthread_create(&params->philo_threads[i], NULL, &routine,
+		if (pthread_create(&params->philo_threads[i], NULL, &routine_main,
 				&params->philos[i]))
 			return (1);
 		i++;
 	}
-	if (pthread_create(&params->monit_all_alive, NULL, &all_alive_routine,
+	if (pthread_create(&params->monit_all_alive, NULL, &routine_check_dead,
 			params))
 		return (1);
 	if (params->num_times_to_eat > 0 && pthread_create(&params->monit_all_full,
-			NULL, &all_full_routine, params))
+			NULL, &routine_check_full, params))
 		return (1);
 	return (0);
 }
@@ -68,10 +68,11 @@ int	join_threads(t_params *params)
 	if (params->num_times_to_eat > 0 && pthread_join(params->monit_all_full,
 			NULL))
 		return (1);
-	while (++i < num_of_philos)
+	while (i < num_of_philos)
 	{
 		if (pthread_join(params->philo_threads[i], NULL))
 			return (1);
+		i++;
 	}
 	return (0);
 }

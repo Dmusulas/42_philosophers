@@ -22,9 +22,9 @@
  * to die.
  * @return The time to die in milliseconds.
  */
-uint64_t	get_time_die(t_params *params)
+time_t	get_time_die(t_params *params)
 {
-	uint64_t	death_time;
+	time_t	death_time;
 
 	pthread_mutex_lock(&params->mut_time_die);
 	death_time = params->time_die;
@@ -42,9 +42,9 @@ uint64_t	get_time_die(t_params *params)
  * to sleep.
  * @return The time to sleep in milliseconds.
  */
-uint64_t	get_time_sleep(t_params *params)
+time_t	get_time_sleep(t_params *params)
 {
-	uint64_t	sleep_time;
+	time_t	sleep_time;
 
 	pthread_mutex_lock(&params->mut_time_sleep);
 	sleep_time = params->time_sleep;
@@ -62,9 +62,9 @@ uint64_t	get_time_sleep(t_params *params)
  * to eat.
  * @return The time to eat in milliseconds.
  */
-uint64_t	get_time_eat(t_params *params)
+time_t	get_time_eat(t_params *params)
 {
-	uint64_t	eat_time;
+	time_t	eat_time;
 
 	pthread_mutex_lock(&params->mut_time_eat);
 	eat_time = params->time_eat;
@@ -82,9 +82,9 @@ uint64_t	get_time_eat(t_params *params)
  * philosopher.
  * @return The last meal time of the philosopher in milliseconds.
  */
-uint64_t	get_last_eat_time(t_philo *philo)
+time_t	get_last_eat_time(t_philo *philo)
 {
-	uint64_t	meal_time;
+	time_t	meal_time;
 
 	pthread_mutex_lock(&philo->mut_last_eat_time);
 	meal_time = philo->last_eat_time;
@@ -100,11 +100,11 @@ uint64_t	get_last_eat_time(t_philo *philo)
  *
  * @param params Pointer to the `t_params` structure containing the start
  * time.
-* @return The simulation start time in milliseconds.
+ * @return The simulation start time in milliseconds.
  */
-uint64_t	get_time_start(t_params *params)
+time_t	get_time_start(t_params *params)
 {
-	uint64_t	start_time;
+	time_t	start_time;
 
 	pthread_mutex_lock(&params->mut_time_start);
 	start_time = params->time_start;

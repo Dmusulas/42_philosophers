@@ -20,13 +20,13 @@
  *
  * @return The current time in milliseconds, or 0 on failure.
  */
-u_int64_t	get_time(void)
+time_t	get_time(void)
 {
-	struct timeval	tv;
+	struct timeval	tv_now;
 
-	if (gettimeofday(&tv, NULL))
-		return (0);
-	return ((tv.tv_sec * (u_int64_t)1000) + (tv.tv_usec / 1000));
+	if (gettimeofday(&tv_now, NULL))
+		return (1);
+	return ((tv_now.tv_sec * 1000) + (tv_now.tv_usec / 1000));
 }
 
 /**
@@ -37,9 +37,9 @@ u_int64_t	get_time(void)
  *
  * @param time_to_sleep Duration to sleep in milliseconds.
  */
-void	ft_usleep(u_int64_t time_to_sleep)
+void	ft_usleep(time_t time_to_sleep)
 {
-	u_int64_t	start_time;
+	time_t	start_time;
 
 	start_time = get_time();
 	while ((get_time() - start_time) < time_to_sleep)

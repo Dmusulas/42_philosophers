@@ -44,3 +44,33 @@ void	set_philo_state(t_philo *philo, t_philo_state state)
 		philo->state = state;
 	pthread_mutex_unlock(&philo->mut_state);
 }
+
+void	set_all_states(t_philo *philo, t_philo_state state)
+{
+	t_philo	*philos;
+	int		i;
+	int		nb_philos;
+
+	nb_philos = get_num_of_philos(philo->params);
+	philos = philo->params->philos;
+	i = 0;
+	while (i < nb_philos)
+	{
+		set_philo_state(&philos[i], state);
+		i++;
+	}
+}
+
+void	set_last_eat_time(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->mut_last_eat_time);
+	philo->last_eat_time = get_time();
+	pthread_mutex_unlock(&philo->mut_last_eat_time);
+}
+
+void	set_meals_eaten(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->mut_meals_eaten);
+	philo->meals_eaten = philo->meals_eaten + 1;
+	pthread_mutex_unlock(&philo->mut_meals_eaten);
+}

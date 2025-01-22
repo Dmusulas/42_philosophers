@@ -6,7 +6,7 @@
 /*   By: dmusulas <dmusulas@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 17:44:22 by dmusulas          #+#    #+#             */
-/*   Updated: 2025/01/22 03:11:07 by dmusulas         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:41:50 by dmusulas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ typedef enum e_philo_state
 	IDLE = 5
 }	t_philo_state;
 
+typedef enum e_fork
+{
+	RIGHT = 0,
+	LEFT = 1,
+}	t_fork;
+
 typedef struct s_philo
 {
 	int				id;
@@ -47,7 +53,7 @@ typedef struct s_philo
 	pthread_mutex_t	mut_state;
 	pthread_mutex_t	mut_meals_eaten;
 	pthread_mutex_t	mut_last_eat_time;
-	u_int64_t		last_eat_time;
+	time_t			last_eat_time;
 	struct s_params	*params;
 }					t_philo;
 
@@ -57,10 +63,10 @@ typedef struct s_params
 	int				num_of_philos;
 	int				num_times_to_eat;
 	int				num_of_full_philos;
-	u_int64_t		time_start;
-	u_int64_t		time_eat;
-	u_int64_t		time_die;
-	u_int64_t		time_sleep;
+	time_t			time_start;
+	time_t			time_eat;
+	time_t			time_die;
+	time_t			time_sleep;
 	pthread_mutex_t	mut_run;
 	pthread_mutex_t	mut_print;
 	pthread_mutex_t	mut_num_of_philos;
@@ -77,14 +83,18 @@ typedef struct s_params
 
 // INIT
 int				init_program(t_params *params, int argc, char **argv);
+int				validate_input(char *argv[]);
 
 // TIME
-u_int64_t		get_time(void);
-void			ft_usleep(u_int64_t time_to_sleep);
+time_t			get_time(void);
+void			ft_usleep(time_t time_to_sleep);
 
 // SETTERS
 void			set_philo_state(t_philo *philo, t_philo_state state);
 void			set_run(t_params *params, bool set_to);
+void			set_all_states(t_philo *philo, t_philo_state state);
+void			set_last_eat_time(t_philo *philo);
+void			set_meals_eaten(t_philo *philo);
 
 // GETTERS 
 bool			get_run(t_params *params);
@@ -92,18 +102,38 @@ int				get_num_of_philos(t_params *params);
 t_philo_state	get_philo_state(t_philo *philo);
 int				get_meals_eaten(t_philo *philo);
 
-uint64_t		get_time_die(t_params *params);
-uint64_t		get_time_sleep(t_params *params);
-uint64_t		get_time_eat(t_params *params);
-uint64_t		get_last_eat_time(t_philo *philo);
-uint64_t		get_time_start(t_params *params);
+time_t			get_time_die(t_params *params);
+time_t			get_time_sleep(t_params *params);
+time_t			get_time_eat(t_params *params);
+time_t			get_last_eat_time(t_philo *philo);
+time_t			get_time_start(t_params *params);
+
+// CHECKER
+bool			is_philo_full(t_philo *philo);
+bool			is_philo_dead(t_philo *philo);
 
 // THREADS
 int				run_threads(t_params *params);
 int				join_threads(t_params *params);
 
+// FORKS
+int				take_forks(t_philo *philo);
+void			drop_forks(t_philo *philo);
+
+// EAT PRAY LOVE aka what else to do huh
+
+int				_eat(t_philo *philo);
+int				_sleep(t_philo *philo);
+int				_think(t_philo *philo);
+
+// ROUTINES
+void			*routine_main(void *philo_p);
+void			*routine_check_full(void *params_p);
+void			*routine_check_dead(void *params_p);
+
+// UTILS
 void			help_msg(char *err);
-int				ft_is_integer(char *str);
-int				validate_input(char *argv[]);
+void			print_msg(t_params *params, int id, char *msg);
 long			ft_atoi(const char *nptr);
+void			free_params(t_params *params);
 #endif

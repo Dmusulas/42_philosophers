@@ -35,12 +35,14 @@ static int	init_forks(t_params *params)
 		i++;
 	}
 	i = 0;
-	philos[0].l_fork = &params->forks[0];
-	philos[0].r_fork = &params->forks[params->num_of_philos - 1];
-	while (++i < params->num_of_philos)
+	while (i < params->num_of_philos)
 	{
 		philos[i].l_fork = &params->forks[i];
-		philos[i].r_fork = &params->forks[i - 1];
+		if (i == 0)
+			philos[i].r_fork = &params->forks[params->num_of_philos - 1];
+		else
+			philos[i].r_fork = &params->forks[i - 1];
+		i++;
 	}
 	return (0);
 }
@@ -71,7 +73,7 @@ static int	init_philos(t_params *params)
 		philos[i].id = i + 1;
 		philos[i].meals_eaten = 0;
 		philos[i].state = IDLE;
-		update_last_meal_time(&philos[i]);
+		set_last_eat_time(&philos[i]);
 		i++;
 	}
 	return (0);
@@ -116,9 +118,9 @@ static int	init_params(t_params *params, int argc, char **argv)
 	params->run = true;
 	params->num_of_full_philos = 0;
 	params->num_of_philos = ft_atoi(argv[1]);
-	params->time_die = (u_int64_t)ft_atoi(argv[2]);
-	params->time_eat = (u_int64_t)ft_atoi(argv[3]);
-	params->time_sleep = (u_int64_t)ft_atoi(argv[4]);
+	params->time_die = (time_t)ft_atoi(argv[2]);
+	params->time_eat = (time_t)ft_atoi(argv[3]);
+	params->time_sleep = (time_t)ft_atoi(argv[4]);
 	if (argc == 6)
 		params->num_times_to_eat = ft_atoi(argv[5]);
 	else

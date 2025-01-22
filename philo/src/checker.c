@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmusulas <dmusulas@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/17 17:43:57 by dmusulas          #+#    #+#             */
-/*   Updated: 2024/06/17 17:48:47 by dmusulas         ###   ########.fr       */
+/*   Created: 2025/01/22 15:30:50 by dmusulas          #+#    #+#             */
+/*   Updated: 2025/01/22 15:30:50 by dmusulas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char *argv[])
+bool	is_philo_dead(t_philo *philo)
 {
-	t_params	params;
-
-	if (argc < 5 || argc > 6)
+	if (get_time() - get_last_eat_time(philo) > get_time_die(philo->params)
+		&& get_philo_state(philo) != EATING)
 	{
-		help_msg("Incorrect amount of arguments");
-		exit(EXIT_FAILURE);
+		set_philo_state(philo, DEAD);
+		return (true);
 	}
-	if (validate_input(argv))
-		exit(EXIT_FAILURE);
-	if (init_program(&params, argc, argv))
-		exit(EXIT_FAILURE);
-	run_threads(&params);
-	join_threads(&params);
-	free_params(&params);
-	return (EXIT_SUCCESS);
+	return (false);
+}
+
+bool	is_philo_full(t_philo *philo)
+{
+	if (get_meals_eaten(philo) >= philo->params->num_times_to_eat)
+		return (true);
+	return (false);
 }
