@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmusulas <dmusulas@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/17 17:44:22 by dmusulas          #+#    #+#             */
-/*   Updated: 2024/06/17 19:42:13 by dmusulas         ###   ########.fr       */
+/*   Created: 2024/06/17 17:43:57 by dmusulas          #+#    #+#             */
+/*   Updated: 2024/06/17 17:48:47 by dmusulas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H 
-# define PHILO_H
+#include "philo.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <errno.h>
 
-void	help_msg(char *err);
-#endif
+int	main(int argc, char *argv[])
+{
+	t_params	params;
+
+	if (argc < 5 || argc > 6)
+	{
+		help_msg("Incorrect amount of arguments");
+		exit(EXIT_FAILURE);
+	}
+	if (validate_input(argv))
+		exit(EXIT_FAILURE);
+	if (init_program(&params, argc, argv))
+		exit(EXIT_FAILURE);
+	run_threads(&params);
+	join_threads(&params);
+	free_data(&params);
+	return (EXIT_SUCCESS);
+}

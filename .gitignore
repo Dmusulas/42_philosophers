@@ -1,1 +1,5 @@
-.cache/*
+.cache
+.DS_Store
+en.subject.pdf
+obj
+compile_commands.json

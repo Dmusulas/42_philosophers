@@ -6,7 +6,7 @@
 #    By: dmusulas <dmusulas@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/17 17:42:00 by dmusulas          #+#    #+#              #
-#    Updated: 2024/06/17 19:41:50 by dmusulas         ###   ########.fr        #
+#    Updated: 2024/12/09 17:49:39 by dmusulas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ RM			 = rm -rf
 VPATH        = src:include
 INCLUDES     = philo.h
 PHILO_SRCS  = main.c\
-			  utils.c
+			  utils.c\
+			  io.c
 PHILO_OBJS = $(PHILO_SRCS:%.c=obj/%.o)
 PHILO_DEPS = $(PHILO_OBJS:%.o=%.d)
 
