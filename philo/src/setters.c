@@ -64,7 +64,7 @@ void	set_all_states(t_philo *philo, t_philo_state state)
 void	set_last_eat_time(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mut_last_eat_time);
-	philo->last_eat_time = get_time();
+	philo->last_eat_time = get_mtime();
 	pthread_mutex_unlock(&philo->mut_last_eat_time);
 }
 

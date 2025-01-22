@@ -25,7 +25,7 @@ bool	is_philo_dead(t_philo *philo)
 	time_t	last_eat_time;
 	time_t	time_to_die;
 
-	current_time = get_time();
+	current_time = get_mtime();
 	last_eat_time = get_last_eat_time(philo);
 	time_to_die = get_time_die(philo->params);
 	if ((current_time - last_eat_time > time_to_die)

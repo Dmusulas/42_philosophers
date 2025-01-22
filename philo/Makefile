@@ -6,7 +6,7 @@
 #    By: dmusulas <dmusulas@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/17 17:42:00 by dmusulas          #+#    #+#              #
-#    Updated: 2025/01/22 18:29:14 by dmusulas         ###   ########.fr        #
+#    Updated: 2025/01/22 23:02:24 by dmusulas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,7 @@ PHILO_SRCS  = checker.c\
 			  routines.c\
 			  setters.c\
 			  threads.c\
-			  time.c\
-			  utils.c
+			  time.c
 PHILO_OBJS = $(PHILO_SRCS:%.c=obj/%.o)
 PHILO_DEPS = $(PHILO_OBJS:%.o=%.d)
 

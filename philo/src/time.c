@@ -20,7 +20,7 @@
  *
  * @return The current time in milliseconds, or 0 on failure.
  */
-time_t	get_time(void)
+time_t	get_mtime(void)
 {
 	struct timeval	tv_now;
 
@@ -41,8 +41,8 @@ void	ft_usleep(time_t time_to_sleep)
 {
 	time_t	start_time;
 
-	start_time = get_time();
-	while ((get_time() - start_time) < time_to_sleep)
+	start_time = get_mtime();
+	while ((get_mtime() - start_time) < time_to_sleep)
 		usleep(200);
 }
 

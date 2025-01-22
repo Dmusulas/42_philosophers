@@ -6,7 +6,7 @@
 /*   By: dmusulas <dmusulas@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 17:44:22 by dmusulas          #+#    #+#             */
-/*   Updated: 2025/01/22 18:49:25 by dmusulas         ###   ########.fr       */
+/*   Updated: 2025/01/22 23:20:40 by dmusulas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int				init_program(t_params *params, int argc, char **argv);
 int				validate_input(char *argv[]);
 
 // TIME
-time_t			get_time(void);
+time_t			get_mtime(void);
 void			ft_usleep(time_t time_to_sleep);
 
 // SETTERS
@@ -134,7 +134,7 @@ void			*routine_check_full(void *params_p);
 void			*routine_check_dead(void *params_p);
 
 // UTILS
-void			help_msg(char *err);
+void			help_msg(char *err, char *failing_arg);
 void			print_msg(t_params *params, int id, char *msg);
 long			ft_atoi(const char *nptr);
 void			free_params(t_params *params);

@@ -59,3 +59,24 @@ int	_sleep(t_philo *philo)
 	ft_usleep(get_time_sleep(params));
 	return (0);
 }
+
+/**
+ * @brief Makes a philosopher perform the thinking action.
+ *
+ * Sets the philosopher's state to thinking and waits for the specified
+ * sleep duration unless the philosopher is dead.
+ *
+ * @param philo Pointer to the philosopher structure.
+ * @return 0 on success, 1 if the philosopher is dead.
+ */
+int	_think(t_philo *philo)
+{
+	t_params	*params;
+
+	params = philo->params;
+	set_philo_state(philo, THINKING);
+	if (get_philo_state(philo) == DEAD)
+		return (1);
+	print_msg(params, philo->id, MSG_STATUS_THINK);
+	return (0);
+}

@@ -55,6 +55,14 @@ static int	ft_isspace(char c)
 		return (0);
 }
 
+void	print_msg(t_params *params, int id, char *msg)
+{
+	pthread_mutex_lock(&params->mut_print);
+	if (get_run(params))
+		printf("%ld %d %s\n", get_mtime() - get_time_start(params), id, msg);
+	pthread_mutex_unlock(&params->mut_print);
+}
+
 /**
  * @brief Converts a string to an integer.
  *
@@ -110,13 +118,15 @@ int	validate_input(char *argv[])
 	{
 		if (!ft_is_integer(argv[i]))
 		{
-			help_msg("Incorect input: non-integer detected");
+			help_msg("Incorect input non-integer detected: ", argv[i]);
 			exit_status = 1;
+			break ;
 		}
 		if (ft_atoi(argv[i]) <= 0)
 		{
-			help_msg("Incorect input: non-positive input detected");
+			help_msg("Incorect input non-positive input detected: ", argv[i]);
 			exit_status = 1;
+			break ;
 		}
 		i++;
 	}
