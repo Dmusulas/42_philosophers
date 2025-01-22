@@ -6,7 +6,7 @@
 /*   By: dmusulas <dmusulas@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 03:10:30 by dmusulas          #+#    #+#             */
-/*   Updated: 2025/01/22 03:10:30 by dmusulas         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:47:24 by dmusulas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ void	*routine_main(void *philo_p)
 
 	philo = (t_philo *)philo_p;
 	set_last_eat_time(philo);
+	print_msg(philo->params, philo->id, MSG_STATUS_THINK);
 	if (philo->id % 2 == 0)
-	{
 		ft_usleep(philo->params->time_eat);
-		print_msg(philo->params, philo->id, MSG_STATUS_THINK);
-	}
 	while (get_philo_state(philo) != DEAD)
 	{
 		if (_eat(philo))
@@ -43,22 +41,23 @@ void	*routine_check_full(void *params_p)
 {
 	t_params	*params;
 	int			i;
-	int			num_philos;
+	int			full_count;
 
 	params = (t_params *)params_p;
-	num_philos = get_num_of_philos(params);
-	i = 0;
-	while (i < num_philos && get_run(params))
+	while (get_run(params))
 	{
-		usleep(1000);
-		if (!is_philo_full(&params->philos[i]))
+		i = -1;
+		full_count = 0;
+		while (++i < get_num_of_philos(params))
+			if (is_philo_full(&params->philos[i]))
+				full_count++;
+		if (full_count == get_num_of_philos(params))
+		{
+			set_run(params, false);
+			set_all_states(&params->philos[0], DEAD);
 			break ;
-		i++;
-	}
-	if (get_run(params))
-	{
-		set_run(params, false);
-		set_all_states(&params->philos[0], DEAD);
+		}
+		usleep(SLEEP_BUFFER);
 	}
 	return (NULL);
 }
@@ -68,23 +67,24 @@ void	*routine_check_dead(void *params_p)
 	t_params	*params;
 	t_philo		*philos;
 	int			i;
-	int			num_philos;
 
 	params = (t_params *)params_p;
 	philos = params->philos;
-	num_philos = get_num_of_philos(params);
-	i = 0;
-	while (i < num_philos && get_run(params))
+	while (get_run(params))
 	{
-		if (is_philo_dead(&philos[i]) && get_run(params))
+		i = 0;
+		while (i < get_num_of_philos(params) && get_run(params))
 		{
-			print_msg(params, philos[i].id, MSG_STATUS_DIE);
-			set_run(params, false);
-			set_all_states(&params->philos[0], DEAD);
-			break ;
+			if (is_philo_dead(&philos[i]))
+			{
+				print_msg(params, philos[i].id, MSG_STATUS_DIE);
+				set_run(params, false);
+				set_all_states(&params->philos[0], DEAD);
+				break ;
+			}
+			i++;
 		}
-		usleep(1000);
-		i++;
+		usleep(SLEEP_BUFFER);
 	}
 	return (NULL);
 }

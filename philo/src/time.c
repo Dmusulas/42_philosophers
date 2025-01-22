@@ -45,3 +45,16 @@ void	ft_usleep(time_t time_to_sleep)
 	while ((get_time() - start_time) < time_to_sleep)
 		usleep(200);
 }
+
+/**
+ * @brief Helper function for locking mutex and getting value from a struct.
+ */
+time_t	get_time_param(pthread_mutex_t *mutex, time_t *field)
+{
+	time_t	value;
+
+	pthread_mutex_lock(mutex);
+	value = *field;
+	pthread_mutex_unlock(mutex);
+	return (value);
+}

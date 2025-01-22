@@ -24,12 +24,7 @@
  */
 time_t	get_time_die(t_params *params)
 {
-	time_t	death_time;
-
-	pthread_mutex_lock(&params->mut_time_die);
-	death_time = params->time_die;
-	pthread_mutex_unlock(&params->mut_time_die);
-	return (death_time);
+	return (get_time_param(&params->mut_time_die, &params->time_die));
 }
 
 /**
@@ -44,12 +39,7 @@ time_t	get_time_die(t_params *params)
  */
 time_t	get_time_sleep(t_params *params)
 {
-	time_t	sleep_time;
-
-	pthread_mutex_lock(&params->mut_time_sleep);
-	sleep_time = params->time_sleep;
-	pthread_mutex_unlock(&params->mut_time_sleep);
-	return (sleep_time);
+	return (get_time_param(&params->mut_time_sleep, &params->time_sleep));
 }
 
 /**
@@ -64,12 +54,7 @@ time_t	get_time_sleep(t_params *params)
  */
 time_t	get_time_eat(t_params *params)
 {
-	time_t	eat_time;
-
-	pthread_mutex_lock(&params->mut_time_eat);
-	eat_time = params->time_eat;
-	pthread_mutex_unlock(&params->mut_time_eat);
-	return (eat_time);
+	return (get_time_param(&params->mut_time_eat, &params->time_eat));
 }
 
 /**
@@ -84,12 +69,7 @@ time_t	get_time_eat(t_params *params)
  */
 time_t	get_last_eat_time(t_philo *philo)
 {
-	time_t	meal_time;
-
-	pthread_mutex_lock(&philo->mut_last_eat_time);
-	meal_time = philo->last_eat_time;
-	pthread_mutex_unlock(&philo->mut_last_eat_time);
-	return (meal_time);
+	return (get_time_param(&philo->mut_last_eat_time, &philo->last_eat_time));
 }
 
 /**
@@ -104,10 +84,5 @@ time_t	get_last_eat_time(t_philo *philo)
  */
 time_t	get_time_start(t_params *params)
 {
-	time_t	start_time;
-
-	pthread_mutex_lock(&params->mut_time_start);
-	start_time = params->time_start;
-	pthread_mutex_unlock(&params->mut_time_start);
-	return (start_time);
+	return (get_time_param(&params->mut_time_start, &params->time_start));
 }

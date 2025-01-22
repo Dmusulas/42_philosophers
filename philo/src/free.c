@@ -12,6 +12,14 @@
 
 #include "philo.h"
 
+/**
+ * @brief Frees all allocated resources and destroys mutexes.
+ *
+ * Iterates through all philosophers and forks to destroy their mutexes,
+ * then frees the allocated memory for threads, philosophers, and forks.
+ *
+ * @param params Pointer to the simulation parameters structure.
+ */
 void	free_params(t_params *params)
 {
 	int	i;

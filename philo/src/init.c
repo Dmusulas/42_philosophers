@@ -72,7 +72,7 @@ static int	init_philos(t_params *params)
 		philos[i].params = params;
 		philos[i].id = i + 1;
 		philos[i].meals_eaten = 0;
-		philos[i].state = IDLE;
+		philos[i].state = THINKING;
 		set_last_eat_time(&philos[i]);
 		i++;
 	}

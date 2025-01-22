@@ -6,14 +6,14 @@
 #    By: dmusulas <dmusulas@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/17 17:42:00 by dmusulas          #+#    #+#              #
-#    Updated: 2025/01/22 16:43:11 by dmusulas         ###   ########.fr        #
+#    Updated: 2025/01/22 18:29:14 by dmusulas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 # Variables
 CC           = cc
-CFLAGS       = -Wall -Wextra -Werror -g -Iinclude -Isrc 
+CFLAGS       = -Wall -Wextra -Werror -g -Iinclude -Isrc #-fsanitize=thread -O3
 NAME         = philo 
 MAKE_LIB     = make -C
 RM			 = rm -rf

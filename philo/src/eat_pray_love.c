@@ -12,6 +12,16 @@
 
 #include "philo.h"
 
+/**
+ * @brief Makes a philosopher perform the eating action.
+ *
+ * This function sets the philosopher's state to eating, updates the last
+ * meal time, increments the meal counter, and holds forks for the
+ * duration of the eating period.
+ *
+ * @param philo Pointer to the philosopher structure.
+ * @return 0 on success, 1 if an error occurs.
+ */
 int	_eat(t_philo *philo)
 {
 	t_params	*params;
@@ -28,6 +38,15 @@ int	_eat(t_philo *philo)
 	return (0);
 }
 
+/**
+ * @brief Makes a philosopher perform the sleeping action.
+ *
+ * Sets the philosopher's state to sleeping and waits for the specified
+ * sleep duration unless the philosopher is dead.
+ *
+ * @param philo Pointer to the philosopher structure.
+ * @return 0 on success, 1 if the philosopher is dead.
+ */
 int	_sleep(t_philo *philo)
 {
 	t_params	*params;
@@ -38,17 +57,5 @@ int	_sleep(t_philo *philo)
 		return (1);
 	print_msg(params, philo->id, MSG_STATUS_SLEEP);
 	ft_usleep(get_time_sleep(params));
-	return (0);
-}
-
-int	_think(t_philo *philo)
-{
-	t_params	*params;
-
-	params = philo->params;
-	set_philo_state(philo, THINKING);
-	if (get_philo_state(philo) == DEAD)
-		return (1);
-	print_msg(params, philo->id, MSG_STATUS_THINK);
 	return (0);
 }

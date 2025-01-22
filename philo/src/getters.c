@@ -15,10 +15,10 @@
 /**
  * @brief Retrieves the current running state of the simulation.
  *
- * This function acquires a mutex lock to safely access the `run` flag in
- * the `params` structure, ensuring thread-safe operations.
+ * Ensures thread-safe access to the `run` flag in the `params` structure
+ * by acquiring a mutex lock.
  *
- * @param params Pointer to the `t_params` structure containing the `run` flag.
+ * @param params Pointer to the `t_params` structure.
  * @return `true` if the simulation is running, `false` otherwise.
  */
 bool	get_run(t_params *params)
@@ -32,14 +32,13 @@ bool	get_run(t_params *params)
 }
 
 /**
- * @brief Retrieves the number of philosophers in the simulation.
+ * @brief Retrieves the total number of philosophers.
  *
- * This function acquires a mutex lock to safely access the `num_of_philos`
- * field in the `params` structure, ensuring thread-safe operations.
+ * Provides thread-safe access to the `num_of_philos` field within the
+ * `params` structure by utilizing a mutex lock.
  *
- * @param params Pointer to the `t_params` structure containing the
- * philosopher count.
- * @return The number of philosophers.
+ * @param params Pointer to the `t_params` structure.
+ * @return The number of philosophers in the simulation.
  */
 int	get_num_of_philos(t_params *params)
 {
@@ -54,10 +53,10 @@ int	get_num_of_philos(t_params *params)
 /**
  * @brief Retrieves the current state of a philosopher.
  *
- * This function acquires a mutex lock to safely access the `state` field in
- * the `philo` structure, ensuring thread-safe operations.
+ * Safely accesses the `state` field in the `philo` structure by acquiring
+ * a mutex lock.
  *
- * @param philo Pointer to the `t_philo` structure representing a philosopher.
+ * @param philo Pointer to the `t_philo` structure.
  * @return The current state of the philosopher as a `t_philo_state`.
  */
 t_philo_state	get_philo_state(t_philo *philo)
@@ -71,12 +70,12 @@ t_philo_state	get_philo_state(t_philo *philo)
 }
 
 /**
- * @brief Retrieves the number of meals eaten by a philosopher.
+ * @brief Retrieves the total number of meals eaten by a philosopher.
  *
- * This function acquires a mutex lock to safely access the `meals_eaten`
- * field in the `philo` structure, ensuring thread-safe operations.
+ * Safely accesses the `meals_eaten` field in the `philo` structure by
+ * acquiring a mutex lock.
  *
- * @param philo Pointer to the `t_philo` structure representing a philosopher.
+ * @param philo Pointer to the `t_philo` structure.
  * @return The number of meals eaten by the philosopher.
  */
 int	get_meals_eaten(t_philo *philo)

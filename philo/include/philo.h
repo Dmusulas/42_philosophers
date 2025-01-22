@@ -6,7 +6,7 @@
 /*   By: dmusulas <dmusulas@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 17:44:22 by dmusulas          #+#    #+#             */
-/*   Updated: 2025/01/22 16:41:50 by dmusulas         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:49:25 by dmusulas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define MSG_STATUS_THINK "is thinking"
 # define MSG_STATUS_SLEEP "is sleeping"
 # define MSG_STATUS_DIE "died"
+# define SLEEP_BUFFER 50
 
 typedef enum e_philo_state
 {
@@ -102,6 +103,7 @@ int				get_num_of_philos(t_params *params);
 t_philo_state	get_philo_state(t_philo *philo);
 int				get_meals_eaten(t_philo *philo);
 
+time_t			get_time_param(pthread_mutex_t *mutex, time_t *field);
 time_t			get_time_die(t_params *params);
 time_t			get_time_sleep(t_params *params);
 time_t			get_time_eat(t_params *params);
