@@ -27,6 +27,8 @@ int	_eat(t_philo *philo)
 	t_params	*params;
 
 	params = philo->params;
+	if (get_meals_eaten(philo) >= params->num_times_to_eat)
+		return (1);
 	if (take_forks(philo) != 0)
 		return (1);
 	set_philo_state(philo, EATING);
