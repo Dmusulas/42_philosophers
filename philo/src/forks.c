@@ -43,6 +43,7 @@ static int	handle_one_philo(t_philo *philo)
 {
 	take_fork(philo->l_fork, philo);
 	ft_usleep(get_time_die(philo->params));
+	drop_forks(philo);
 	set_philo_state(philo, DEAD);
 	return (1);
 }
