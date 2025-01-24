@@ -18,7 +18,6 @@ void	*routine_main(void *philo_p)
 
 	philo = (t_philo *)philo_p;
 	set_last_eat_time(philo);
-	print_msg(philo->params, philo->id, MSG_STATUS_THINK);
 	if (philo->id % 2 == 0)
 		ft_usleep(philo->params->time_eat);
 	while (get_philo_state(philo) != DEAD)

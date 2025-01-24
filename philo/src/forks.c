@@ -79,7 +79,7 @@ int	take_forks(t_philo *philo)
 		}
 	}
 	else
-		handle_one_philo(philo);
+		return (handle_one_philo(philo));
 	return (0);
 }
 
