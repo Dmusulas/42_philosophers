@@ -6,7 +6,7 @@
 /*   By: dmusulas <dmusulas@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:14:19 by dmusulas          #+#    #+#             */
-/*   Updated: 2025/01/22 12:14:19 by dmusulas         ###   ########.fr       */
+/*   Updated: 2025/01/27 05:59:32 by dmusulas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	_eat(t_philo *philo)
 	t_params	*params;
 
 	params = philo->params;
-	if (get_meals_eaten(philo) >= params->num_times_to_eat)
+	if (params->num_times_to_eat != -1
+		&& get_meals_eaten(philo) >= params->num_times_to_eat)
 		return (1);
 	if (take_forks(philo) != 0)
 		return (1);
